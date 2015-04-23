@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+ <script type="text/javascript" src=force-graph.js></script> 
+ <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+ <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+</head>
+<body>
+
+
+<div id="viz-container"></div>
+
+
+<script type="text/javascript">
+ $(document).ready(function() {
+     "use strict";
+  
+     var width = $("#viz-container").parent().width(),
+         height = 960,
+         svg = d3.select("#viz-container").append("svg")
+                 .attr("width", width)
+                 .attr("height", height),
+         graph = NetworkGraph()
+                 .width(width)
+                 .height(height)
+                 .type("entity"),
+         graph_export_data;
+     $.get('wiki?query=Madoff', function(data) {
+     
+             var graph_data = JSON.parse(data);
+             svg.datum(graph_data)
+                     .call(graph);
+             graph_export_data = graph.getExport();
+     });
+    
+});
+</script>
+</body>
+</html>
