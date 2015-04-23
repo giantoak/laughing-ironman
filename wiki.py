@@ -24,9 +24,9 @@ def run(query):
 		}
 		tags=map(lambda x: x['_id'],r.json()['matches'])
 		if 'fraud' in tags:
-			g.add_node(hit['_id'],type="entity",category="entity")
+			g.add_node(hit['_id'],type="entity",category="fraud")
 		else:
-			g.add_node(hit['_id'],type="entity",category="entity")
+			g.add_node(hit['_id'],type="entity",category="document")
 		r2=requests.post('http://ec2-54-167-240-67.compute-1.amazonaws.com:9200/tmp/mitie/_search',data=json.dumps(payload))
 		data2=r2.json()
 		for hit2 in data2['hits']['hits']:
