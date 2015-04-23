@@ -143,7 +143,12 @@ function NetworkGraph() {
             ////////////////////////////////////////////////
             // Fill in colors based off type of entity (vs. single color documents)
             .style("fill", function(d) { 
+                if(d.category == "fraud"){
+                    return "red";
+                }
+                else{
                 return d.type == type ? ent_colors(d.category) : "white";
+                }
             })
             .style("opacity", DEFAULT_ALPHA)
             ////////////////////////////////////////////////
